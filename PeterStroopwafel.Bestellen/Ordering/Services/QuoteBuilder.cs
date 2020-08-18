@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordering.Services
 {
     public class QuoteBuilder
     {
-        public Quote CreateOrder(IList<KeyValuePair<StroopwafelType, int>> orderDetails, 
-                                 IList<Stroopwafel> stroopwafels, 
+        public Quote CreateOrder(IList<KeyValuePair<StroopwafelType, int>> orderDetails,
+                                 IList<Stroopwafel> stroopwafels,
                                  ISupplier supplier)
         {
             var orderLines = new List<QuoteLine>();

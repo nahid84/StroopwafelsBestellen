@@ -1,5 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 using Ordering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Stroopwafels.Models
 {

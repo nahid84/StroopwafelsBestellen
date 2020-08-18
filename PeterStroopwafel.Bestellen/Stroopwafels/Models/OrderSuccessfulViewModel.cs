@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Stroopwafels.Models
+﻿namespace Stroopwafels.Models
 {
     public class OrderSuccessfulViewModel
     {
