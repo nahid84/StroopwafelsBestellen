@@ -143,6 +143,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderRowsExtension.cs" />
     <Compile Include="Models\OrderSuccessfulViewModel.cs" />
     <Compile Include="Models\Quote.cs" />
     <Compile Include="Models\QuoteViewModel.cs" />
