@@ -11,7 +11,7 @@ namespace Stroopwafels.Configuration
         [ConfigurationProperty("SupplierA", IsRequired = false)]
         public SupplierConfiguration SupplierA
         {
-            get { return this["SupplierA"] as SupplierConfiguration;  }
+            get { return this["SupplierA"] as SupplierConfiguration; }
             set { value = this["SupplierA"] as SupplierConfiguration; }
         }
 

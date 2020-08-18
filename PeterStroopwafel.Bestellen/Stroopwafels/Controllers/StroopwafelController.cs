@@ -13,7 +13,7 @@ namespace Stroopwafels.Controllers
         private readonly QuotesQueryHandler _quotesQueryHandler;
         private readonly OrderCommandHandler _orderCommandHandler;
 
-        public StroopwafelController(QuotesQueryHandler quotesQueryHandler, 
+        public StroopwafelController(QuotesQueryHandler quotesQueryHandler,
                                      OrderCommandHandler orderCommandHandler)
         {
             _quotesQueryHandler = quotesQueryHandler;
@@ -23,8 +23,6 @@ namespace Stroopwafels.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            //var config = ConfigurationManager.GetSection("SuppliersSection") as SuppliersSection;
-
             return View(new OrderDetailsViewModel());
         }
 
@@ -56,6 +54,7 @@ namespace Stroopwafels.Controllers
             return Index();
         }
 
+        [HttpPost]
         public ActionResult Order(QuoteViewModel formModel)
         {
             if (this.ModelState.IsValid)
@@ -86,7 +85,7 @@ namespace Stroopwafels.Controllers
             IList<Ordering.Quote> orders = this._quotesQueryHandler.Handle(query);
             return orders;
         }
-        
+
         private IList<KeyValuePair<StroopwafelType, int>> GetOrderDetails(IList<OrderRow> orderRows)
         {
             return orderRows.Select(orderRow => new KeyValuePair<StroopwafelType, int>(orderRow.Type, orderRow.Amount))

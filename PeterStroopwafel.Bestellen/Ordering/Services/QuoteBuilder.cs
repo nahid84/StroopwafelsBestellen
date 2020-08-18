@@ -8,7 +8,9 @@ namespace Ordering.Services
 {
     public class QuoteBuilder
     {
-        public Quote CreateOrder(IList<KeyValuePair<StroopwafelType, int>> orderDetails, IList<Stroopwafel> stroopwafels, ISupplier supplier)
+        public Quote CreateOrder(IList<KeyValuePair<StroopwafelType, int>> orderDetails, 
+                                 IList<Stroopwafel> stroopwafels, 
+                                 ISupplier supplier)
         {
             var orderLines = new List<QuoteLine>();
 

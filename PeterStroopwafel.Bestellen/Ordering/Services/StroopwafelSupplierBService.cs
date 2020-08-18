@@ -17,10 +17,10 @@ namespace Ordering.Services
             new DateTime(2016, 1, 1),
             new DateTime(2016, 12, 25),
             new DateTime(2016, 12, 26)
-        }; 
+        };
 
         public bool IsAvailable => this.GetAvailability();
-        
+
         public StroopwafelSupplierBService(IHttpClientWrapper httpClientWrapper,
                                            ISupplierServiceConfiguration config) : base(httpClientWrapper)
         {

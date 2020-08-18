@@ -51,11 +51,11 @@ namespace Stroopwafels
 
             container.RegisterType<IHttpClientWrapper, HttpClientWrapper>();
 
-            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierAService>("SupplierA", 
+            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierAService>("SupplierA",
                 new InjectionConstructor(typeof(IHttpClientWrapper), typeof(SupplierAServiceConfiguration)));
-            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierBService>("SupplierB", 
+            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierBService>("SupplierB",
                 new InjectionConstructor(typeof(IHttpClientWrapper), typeof(SupplierBServiceConfiguration)));
-            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierCService>("SupplierC", 
+            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierCService>("SupplierC",
                 new InjectionConstructor(typeof(IHttpClientWrapper), typeof(SupplierCServiceConfiguration)));
 
             container.RegisterType<QuotesQueryHandler>();

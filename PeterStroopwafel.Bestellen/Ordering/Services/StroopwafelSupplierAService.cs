@@ -13,7 +13,7 @@ namespace Ordering.Services
 
         public bool IsAvailable => true;
 
-        public StroopwafelSupplierAService(IHttpClientWrapper httpClientWrapper, 
+        public StroopwafelSupplierAService(IHttpClientWrapper httpClientWrapper,
                                            ISupplierServiceConfiguration config) : base(httpClientWrapper)
         {
             ProductsUri = new Uri(config.GetProductsUri());

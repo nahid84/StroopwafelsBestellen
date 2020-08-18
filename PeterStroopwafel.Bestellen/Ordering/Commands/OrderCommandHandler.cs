@@ -15,7 +15,7 @@ namespace Ordering.Commands
 
         public void Handle(OrderCommand command)
         {
-            var stroopwafelSupplierService = 
+            var stroopwafelSupplierService =
                 _stroopwafelSupplierServices.Single(service => service.Supplier.Name.Equals(command.Supplier, StringComparison.InvariantCultureIgnoreCase));
 
             stroopwafelSupplierService.Order(command.OrderLines);

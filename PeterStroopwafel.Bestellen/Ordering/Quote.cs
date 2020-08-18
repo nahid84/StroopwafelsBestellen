@@ -15,7 +15,7 @@ namespace Ordering
         }
 
         public IList<QuoteLine> OrderLines { get; }
-        
+
         public ISupplier Supplier { get; }
 
         public Quote(IList<QuoteLine> orderLines, ISupplier supplier)

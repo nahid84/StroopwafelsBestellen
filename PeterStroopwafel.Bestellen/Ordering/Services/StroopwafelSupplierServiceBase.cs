@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 
 namespace Ordering.Services
 {
@@ -53,7 +46,7 @@ namespace Ordering.Services
                 Method = HttpMethod.Get,
             };
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(mediaType));
-            
+
             return request;
         }
 

@@ -5,11 +5,11 @@ namespace Stroopwafels.Configuration
 {
     public class SupplierAServiceConfiguration : ISupplierServiceConfiguration
     {
-        public string GetProductsUri() 
-        { 
-            return (ConfigurationManager.GetSection("SuppliersSection") as SuppliersSection).SupplierA.ProductsUri; 
+        public string GetProductsUri()
+        {
+            return (ConfigurationManager.GetSection("SuppliersSection") as SuppliersSection).SupplierA.ProductsUri;
         }
-        public string GetOrderUri() 
+        public string GetOrderUri()
         {
             return (ConfigurationManager.GetSection("SuppliersSection") as SuppliersSection).SupplierA.OrderUri;
         }
