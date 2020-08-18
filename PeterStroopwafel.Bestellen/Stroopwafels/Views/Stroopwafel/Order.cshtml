@@ -1,6 +1,9 @@
-﻿@{
+﻿@model Stroopwafels.Models.OrderSuccessfulViewModel
+@{
     ViewBag.Title = "Geslaagde bestelling";
 }
+
+    <h4>U heeft totaal @Model.Quantity item besteld bij @Model.SelectedSupplier en die kost @Model.TotalAmount</h4>
 
 <h2>Bestelling succesvol</h2>
 

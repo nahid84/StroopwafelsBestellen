@@ -134,10 +134,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Configuration\SupplierCServiceConfiguration.cs" />
+    <Compile Include="Configuration\SupplierBServiceConfiguration.cs" />
+    <Compile Include="Configuration\SupplierAServiceConfiguration.cs" />
+    <Compile Include="Configuration\SupplierConfiguration.cs" />
+    <Compile Include="Configuration\SuppliersSection.cs" />
     <Compile Include="Controllers\StroopwafelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderSuccessfulViewModel.cs" />
     <Compile Include="Models\Quote.cs" />
     <Compile Include="Models\QuoteViewModel.cs" />
     <Compile Include="Models\OrderDetailsViewModel.cs" />

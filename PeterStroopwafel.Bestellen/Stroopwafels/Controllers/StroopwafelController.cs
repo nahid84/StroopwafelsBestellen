@@ -23,6 +23,8 @@ namespace Stroopwafels.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            //var config = ConfigurationManager.GetSection("SuppliersSection") as SuppliersSection;
+
             return View(new OrderDetailsViewModel());
         }
 
@@ -54,6 +56,29 @@ namespace Stroopwafels.Controllers
             return Index();
         }
 
+        public ActionResult Order(QuoteViewModel formModel)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var orderDetails = this.GetOrderDetails(formModel.OrderRows);
+
+                var command = new OrderCommand(orderDetails, formModel.SelectedSupplier);
+                this._orderCommandHandler.Handle(command);
+
+                var viewModel = new OrderSuccessfulViewModel();
+
+                viewModel.SelectedSupplier = formModel.SelectedSupplier;
+
+                viewModel.Quantity = formModel.OrderRows.Sum(x => x.Amount);
+
+                viewModel.TotalAmount = formModel.Quotes.Single(x => x.SupplierName.Equals(formModel.SelectedSupplier)).TotalAmount;
+
+                return View(viewModel);
+            }
+
+            return Index();
+        }
+
         private IList<Ordering.Quote> GetQuotesFor(IList<KeyValuePair<StroopwafelType, int>> orderDetails)
         {
             var query = new QuotesQuery(orderDetails);
@@ -68,19 +93,5 @@ namespace Stroopwafels.Controllers
                             .ToList();
         }
 
-        public ActionResult Order(QuoteViewModel formModel)
-        {
-            if (this.ModelState.IsValid)
-            {
-                var orderDetails = this.GetOrderDetails(formModel.OrderRows);
-                
-                var command = new OrderCommand(orderDetails, formModel.SelectedSupplier);
-                this._orderCommandHandler.Handle(command);
-
-                return View();
-            }
-
-            return Index();
-        }
     }
 }

@@ -5,17 +5,19 @@ namespace Ordering.Services
 {
     public class StroopwafelSupplierAService : StroopwafelSupplierServiceBase, IStroopwafelSupplierService
     {
-        private static readonly Uri ProductsUri = new Uri("http://stroopwafela.azurewebsites.net/api/Products");
+        private readonly Uri ProductsUri;
 
-        private static readonly Uri OrderUri = new Uri("http://stroopwafela.azurewebsites.net/api/Order");
+        private readonly Uri OrderUri;
 
         public ISupplier Supplier => new SupplierA();
 
         public bool IsAvailable => true;
 
-        public StroopwafelSupplierAService(IHttpClientWrapper httpClientWrapper) : base(httpClientWrapper)
+        public StroopwafelSupplierAService(IHttpClientWrapper httpClientWrapper, 
+                                           ISupplierServiceConfiguration config) : base(httpClientWrapper)
         {
-
+            ProductsUri = new Uri(config.GetProductsUri());
+            OrderUri = new Uri(config.GetOrderUri());
         }
 
         public Quote GetQuote(IList<KeyValuePair<StroopwafelType, int>> orderDetails)

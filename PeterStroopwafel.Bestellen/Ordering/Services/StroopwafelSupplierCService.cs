@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Ordering.Services
 {
     public class StroopwafelSupplierCService : StroopwafelSupplierServiceBase, IStroopwafelSupplierService
     {
-        private static readonly Uri ProductsUri = new Uri("http://stroopwafelc.azurewebsites.net/api/Products");
+        private readonly Uri ProductsUri;
 
-        private static readonly Uri OrderUri = new Uri("http://stroopwafelc.azurewebsites.net/api/Order");
+        private readonly Uri OrderUri;
 
         public ISupplier Supplier => new SupplierC();
 
         public bool IsAvailable => true;
 
-        public StroopwafelSupplierCService(IHttpClientWrapper httpClientWrapper) : base(httpClientWrapper)
+        public StroopwafelSupplierCService(IHttpClientWrapper httpClientWrapper,
+                                           ISupplierServiceConfiguration config) : base(httpClientWrapper)
         {
+            ProductsUri = new Uri(config.GetProductsUri());
+            OrderUri = new Uri(config.GetOrderUri());
         }
 
         public Quote GetQuote(IList<KeyValuePair<StroopwafelType, int>> orderDetails)

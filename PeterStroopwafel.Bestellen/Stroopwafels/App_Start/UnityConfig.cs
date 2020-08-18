@@ -2,9 +2,10 @@ using Ordering;
 using Ordering.Commands;
 using Ordering.Queries;
 using Ordering.Services;
+using Stroopwafels.Configuration;
 using System;
-
 using Unity;
+using Unity.Injection;
 
 namespace Stroopwafels
 {
@@ -13,6 +14,7 @@ namespace Stroopwafels
     /// </summary>
     public static class UnityConfig
     {
+
         #region Unity Container
         private static Lazy<IUnityContainer> container =
           new Lazy<IUnityContainer>(() =>
@@ -49,9 +51,12 @@ namespace Stroopwafels
 
             container.RegisterType<IHttpClientWrapper, HttpClientWrapper>();
 
-            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierAService>("SupplierA");
-            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierBService>("SupplierB");
-            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierCService>("SupplierC");
+            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierAService>("SupplierA", 
+                new InjectionConstructor(typeof(IHttpClientWrapper), typeof(SupplierAServiceConfiguration)));
+            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierBService>("SupplierB", 
+                new InjectionConstructor(typeof(IHttpClientWrapper), typeof(SupplierBServiceConfiguration)));
+            container.RegisterType<IStroopwafelSupplierService, StroopwafelSupplierCService>("SupplierC", 
+                new InjectionConstructor(typeof(IHttpClientWrapper), typeof(SupplierCServiceConfiguration)));
 
             container.RegisterType<QuotesQueryHandler>();
             container.RegisterType<OrderCommandHandler>();

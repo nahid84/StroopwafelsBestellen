@@ -32,6 +32,7 @@
                 @for (var i = 0; i < Model.Quotes.Count; i++)
                 {
                     @Html.HiddenFor(m => Model.Quotes[i].SupplierName);
+                    @Html.HiddenFor(m => Model.Quotes[i].TotalAmount);
                     <div class="row">
                         <div>
                             @Html.RadioButtonFor(m => Model.SelectedSupplier, Model.Quotes[i].SupplierName)

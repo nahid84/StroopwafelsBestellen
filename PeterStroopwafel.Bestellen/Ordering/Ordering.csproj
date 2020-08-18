@@ -49,6 +49,7 @@
     <Compile Include="Commands\OrderCommandHandler.cs" />
     <Compile Include="IStroopwafelSupplierService.cs" />
     <Compile Include="ISupplier.cs" />
+    <Compile Include="ISupplierServiceConfiguration.cs" />
     <Compile Include="Quote.cs" />
     <Compile Include="QuoteLine.cs" />
     <Compile Include="Queries\QuotesQuery.cs" />
