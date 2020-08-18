@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-using Ordering.Services;
-using Ordering;
+﻿using Ordering;
 using Ordering.Commands;
 using Ordering.Queries;
 using Stroopwafels.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Stroopwafels.Controllers
 {
@@ -17,24 +13,17 @@ namespace Stroopwafels.Controllers
         private readonly QuotesQueryHandler _quotesQueryHandler;
         private readonly OrderCommandHandler _orderCommandHandler;
 
-        public StroopwafelController()
+        public StroopwafelController(QuotesQueryHandler quotesQueryHandler, 
+                                     OrderCommandHandler orderCommandHandler)
         {
-            var httpClientWrapper = new HttpClientWrapper();
-            var suppliers = new IStroopwafelSupplierService[]
-            {
-                new StroopwafelSupplierAService(httpClientWrapper),
-                new StroopwafelSupplierBService(httpClientWrapper),
-                new StroopwafelSupplierCService(httpClientWrapper)
-            };
-            this._quotesQueryHandler = new QuotesQueryHandler(suppliers);
-            this._orderCommandHandler = new OrderCommandHandler(suppliers);
+            _quotesQueryHandler = quotesQueryHandler;
+            _orderCommandHandler = orderCommandHandler;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
-            var viewModel = new OrderDetailsViewModel();
-
-            return View(viewModel);
+            return View(new OrderDetailsViewModel());
         }
 
         [HttpPost]
@@ -46,17 +35,19 @@ namespace Stroopwafels.Controllers
                 var quotes = this.GetQuotesFor(orderDetails);
 
                 var viewModel = new QuoteViewModel();
+
                 foreach (var quote in quotes)
                 {
                     viewModel.Quotes.Add(new Models.Quote
-                             {
-                                 SupplierName = quote.Supplier.Name,
-                                 TotalAmount = quote.TotalPricePresentation
-                             });
+                    {
+                        SupplierName = quote.Supplier.Name,
+                        TotalAmount = quote.TotalPricePresentation
+                    });
                 }
 
                 viewModel.OrderRows = formModel.OrderRows;
-                viewModel.SelectedSupplier = quotes.OrderBy(q => q.TotalPrice).First().Supplier.Name;
+                viewModel.SelectedSupplier = quotes.OrderBy(q => q.TotalPrice)
+                                                   .First().Supplier.Name;
 
                 return View(viewModel);
             }
@@ -73,7 +64,8 @@ namespace Stroopwafels.Controllers
         
         private IList<KeyValuePair<StroopwafelType, int>> GetOrderDetails(IList<OrderRow> orderRows)
         {
-            return orderRows.Select(orderRow => new KeyValuePair<StroopwafelType, int>(orderRow.Type, orderRow.Amount)).ToList();
+            return orderRows.Select(orderRow => new KeyValuePair<StroopwafelType, int>(orderRow.Type, orderRow.Amount))
+                            .ToList();
         }
 
         public ActionResult Order(QuoteViewModel formModel)

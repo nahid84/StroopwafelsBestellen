@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -15,8 +12,7 @@ namespace Stroopwafels
 
         private DateTime StartTime
         {
-            get { return (DateTime)this.Application[this._startTimeKey]; }
-            set { this.Application[this._startTimeKey] = value; }
+            set { Application[_startTimeKey] = value; }
         }
 
         public MvcApplication()
@@ -26,13 +22,15 @@ namespace Stroopwafels
 
         protected void Application_Start()
         {
-            this.StartTime = DateTime.Now;
+            StartTime = DateTime.Now;
+
             AreaRegistration.RegisterAllAreas();
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            UnityMvcActivator.Start();
         }
 
 

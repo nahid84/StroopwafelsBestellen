@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ordering.Queries;
 
 namespace Ordering.Commands
 {
@@ -16,9 +15,8 @@ namespace Ordering.Commands
 
         public void Handle(OrderCommand command)
         {
-            var stroopwafelSupplierService = this._stroopwafelSupplierServices.Single(
-                service =>
-                    service.Supplier.Name.Equals(command.Supplier, StringComparison.InvariantCultureIgnoreCase));
+            var stroopwafelSupplierService = 
+                _stroopwafelSupplierServices.Single(service => service.Supplier.Name.Equals(command.Supplier, StringComparison.InvariantCultureIgnoreCase));
 
             stroopwafelSupplierService.Order(command.OrderLines);
         }
