@@ -9,7 +9,6 @@
 *.sln.docstates
 *.config
 
-
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 MiddlewareLogs/
@@ -26,5 +25,8 @@ x86/
 packages/
 publish/
 
+!web.config
+!web.*.config
+!packages.config
 
 
