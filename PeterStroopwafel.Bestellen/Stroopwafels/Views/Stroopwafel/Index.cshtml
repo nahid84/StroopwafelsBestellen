@@ -3,16 +3,37 @@
     ViewBag.Title = "Stroopwafels bestellen";
 }
 
+<script>
+    $(function () {
+        $('.datepicker').datepicker({
+            dateFormat: 'dd-mm-yy',
+            changeMonth: true,
+            changeyear: true
+        });
+</script>
+
 <div class="jumbotron">
     <h1>Stroopwafels bestellen</h1>
 </div>
 
 <div class="row">
     <div class="col-md-12">
-        @using (Html.BeginForm("GetQuotes", "Stroopwafel", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+        @using (Html.BeginForm("GetQuotes", "Stroopwafel", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
+
+        <div>
+            @Html.LabelFor(m => m.Naam)
+            @Html.TextBoxFor(m => m.Naam)
+            @Html.ValidationMessageFor(model => model.Naam, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.DeliveryDate)
+            @Html.TextBoxFor(m=> m.DeliveryDate, new { @class = "date-picker" })
+            @Html.ValidationMessageFor(model => model.DeliveryDate, "", new { @class = "text-danger" })
+        </div>
 
             <h2>Bestelling</h2>
             <p>
@@ -27,10 +48,28 @@
                     </div>
                 }
             </p>
-            <p><input type="submit" value="Prijzen ophalen" class="btn btn-default" />
+            <p>
+                <input type="submit" value="Prijzen ophalen" class="btn btn-default" />
             </p>
 
         }
     </div>
-    
+
 </div>
+
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryui")  
+@Styles.Render("~/Content/cssjqryUi")  
+  
+ <script type="text/javascript">  
+     $(document).ready(function () {  
+         $("#DeliveryDate").datepicker({  
+             dateFormat: "dd/M/yy",  
+             changeMonth: true,  
+             changeYear: true,  
+             yearRange: "-60:+0",
+             beforeShowDay: $.datepicker.noWeekends
+         });  
+     });  
+</script>  
+}

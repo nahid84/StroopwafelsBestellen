@@ -14,5 +14,7 @@
         }
 
         public string Name => "Leverancier B";
+
+        public int DeliveryDays => 3;
     }
 }

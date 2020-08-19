@@ -2,6 +2,7 @@
 using Ordering.Commands;
 using Ordering.Queries;
 using Stroopwafels.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -32,6 +33,7 @@ namespace Stroopwafels.Controllers
             if (ModelState.IsValid)
             {
                 var quotes = GetQuotesFor(formModel.OrderRows.ToKeyValueList());
+                quotes = FilterOnDeliveryDate(quotes, formModel.DeliveryDate);
 
                 var viewModel = new QuoteViewModel()
                 {
@@ -70,6 +72,13 @@ namespace Stroopwafels.Controllers
         private IList<Ordering.Quote> GetQuotesFor(IList<KeyValuePair<StroopwafelType, int>> orderDetails)
         {
             return _quotesQueryHandler.Handle(new QuotesQuery(orderDetails));
+        }
+
+        private IList<Ordering.Quote> FilterOnDeliveryDate(IList<Ordering.Quote> quotes, DateTime deliveryDate)
+        {
+            (quotes as List<Ordering.Quote>).RemoveAll(m => (deliveryDate.Date - DateTime.Now.Date).TotalDays < m.Supplier.DeliveryDays);
+
+            return quotes;
         }
 
         private void PlaceOrder(IList<KeyValuePair<StroopwafelType, int>> orderDetails, string supplier)

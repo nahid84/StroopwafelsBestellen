@@ -10,5 +10,7 @@
         }
 
         public string Name => "Leverancier C";
+
+        public int DeliveryDays => 5;
     }
 }

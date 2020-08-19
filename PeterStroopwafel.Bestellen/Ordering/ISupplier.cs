@@ -5,5 +5,7 @@
         decimal GetShippingCost(Quote order);
 
         string Name { get; }
+
+        int DeliveryDays { get; }
     }
 }
